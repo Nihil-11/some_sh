@@ -1,0 +1,181 @@
+
+# Реализация циклов и работа с массивом (в данном случае типа "list"):
+
+# 1. Замена элементов по индексу
+# 2. Удаление элементов по индексу
+# 3. Добавление элементов
+
+
+
+from time import sleep # Используется в функции "выхода из программы", добавлено исключительно по приколу
+
+
+# Пустой список оценок
+
+grades = []
+
+
+# Меню взаимодействия с оценками
+
+def menu():
+    print("-----------------------------------")
+    print("\nМеню взаимодействия с оценками:")
+    print("")
+    print("1. Посмотреть текущие оценки")
+    print("2. Добавить оценку")
+    print("3. Изменить оценку")
+    print("4. Удалить оценку")
+    print("5. Посчитать среднюю оценку")
+    print("6. Выход из программы\n")
+    print("-----------------------------------")
+
+
+# Функции взаимодействия с оценками 
+
+def current_grades(): # Посмотреть текущие оценки
+
+    if len(grades) == 0:
+        print("Нет текущих оценок")
+    else:
+        print("Текущие оценки: ", grades)
+
+
+def add(): # Добавить оценку
+
+    if len(grades) < 4:
+
+        try:
+            new_grade = int(input("Введите новую оценку: "))
+
+            if new_grade < 1 or new_grade > 5:
+                print("Введен неверный формат оценки, введите значение от 1 до 5")
+            
+            else:
+                grades.append(new_grade)
+                print("Текущие оценки: ", grades)
+
+        except ValueError:
+            print("Введен неверный формат оценки, введите значение от 1 до 5")
+    else: 
+        print("Нельзя добавить оценку, их максимальное количество - 4")
+
+
+def change_grade(): # Изменить оценку
+
+    if len(grades) > 0:
+
+        try:
+
+            for i in grades:
+
+                ans = int(input("Какую по счету оценку заменить?: "))
+
+                if ans > len(grades) or ans < 0:
+                    print("Оценки с данным порядковым номером не существует")
+
+                else:  
+                    grades[ans - 1] = int(input("Зaменить на: "))
+
+                    if grades[ans - 1] < 1 or grades[ans - 1] > 5:
+                        print("Введен неверный формат оценки, введите значение от 1 до 5")
+
+                    else:
+                        print("Текущие оценки: ", grades)
+
+                break
+
+            if ans < 1 or ans > 4:
+                print("Введите значение от 1 до 4")
+
+        except ValueError:
+            print("Введен неверный формат оценки")
+
+    else:
+        print("Нет текущих оценок")
+
+
+def delete_grade(): # Удалить оценку
+
+    if len(grades) > 0:
+        
+        try:
+            
+            for i in grades:
+
+                answ = int(input("Какую по счету оценку удалить?: "))
+
+                if answ > len(grades) or answ < 0:
+                    print("Оценка с данным порядковым номером не существует")                          
+
+                else:
+                    n = grades.pop(answ - 1)
+                    print("Удалена оценка: ", str(n) + ",", "Текущие оценки: ", grades)
+
+                break
+            
+            if answ < 1 or answ > 4:
+                print("Введите значение от 1 до 4")
+
+
+        except ValueError:
+            print("Введен неверный формат оценки")
+
+    else:
+        print("Нет текущих оценок")
+
+
+def calc_avr(): # Посчитать среднюю оценку
+
+    if len(grades) > 0:
+
+        average_grade = sum(grades) / len(grades)
+
+        if average_grade % 1 == 0:
+            average_grade = int(average_grade)
+            print("Средняя оценка:", average_grade)
+
+        else:
+            print("Средняя оценка:", average_grade)
+            print("Текущие оценки: ", grades)
+
+    else:
+        print("Нет текущих оценок")
+        print("Текущие оценки: ", grades)
+
+         
+
+# Основной цикл программы
+
+while True:
+
+    menu() # Вызов функции возвращает пользователя к меню
+
+    try:
+        choice = int(input("Выберите действие: "))
+
+        if choice == 1:
+            current_grades()
+
+        elif choice == 2:
+            add()
+
+        elif choice == 3:
+            change_grade()
+
+        elif choice == 4:
+            delete_grade()
+
+        elif choice == 5:
+            calc_avr()
+
+        elif choice == 6:
+            print("Выход из программы...")
+            sleep(1.5)
+            print("Выход завершен")
+            break
+
+        else:
+            print("Неверный выбор, выберите действие от 1 до 6.")
+
+    except ValueError:
+        print("Неверный формат")
