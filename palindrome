@@ -1,0 +1,14 @@
+
+def is_palindrome():
+
+    if x == x[::-1]:
+        return(f'"{x}"' + " является палиндромом")
+        
+    else:
+        return(f'"{x}"' + " не является палидромом")
+
+while True:
+
+    x = input("Введите слово или число: ")
+    print(is_palindrome())
+    print("")
