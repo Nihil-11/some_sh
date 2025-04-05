@@ -1,1 +1,90 @@
 
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import ttk
+import random
+
+
+# Main function
+
+def rand():
+
+    try:
+        # Принимает значения прямиком из поля ввода
+        n = int(entry_1.get()) 
+        m = int(entry_2.get())
+
+        if n >= m:
+            messagebox.showerror('', "Начало интервала должно быть меньше конца.")
+            return
+                
+        if isinstance(n, int) and isinstance(m, int):
+        
+            interval = list(range(n, m + 1))            
+            result = random.choice(interval)
+            result_label.config(text=result)
+            return result
+        
+    except ValueError:
+        messagebox.showerror('', "Неверный формат")
+
+
+# Creating the window
+
+def create_window():
+
+    # Visual characteristics
+
+    root = tk.Tk()
+    root.title("Randomizer")
+    root.geometry("700x500")
+    root.configure(bg='black')
+
+    # Text
+
+    rand_label = tk.Label(root, text="Введите границы интервала для выбора случайного числа:", font=("Arial", 16), fg="red", bg="black")
+    rand_label.pack(pady=20)
+
+
+    # Label "от:"
+    from_label = tk.Label(root, text="От:", font=("Arial", 14), fg="red", bg="black")
+    from_label.pack(padx=20)
+
+    # Entry for "от:"
+    global entry_1
+    entry_1 = tk.Entry(root, font=("Arial", 20), bg="white", width=10, justify='center')
+    entry_1.pack(pady=10)
+
+    # Label "до:"
+    to_label = tk.Label(root, text="До:", font=("Arial", 14), fg="red", bg="black")
+    to_label.pack(padx=20)
+
+    # Entry for "до:"
+    global entry_2
+    entry_2 = tk.Entry(root, font=("Arial", 20), bg="white", width=10, justify='center')
+    entry_2.pack(pady=10)
+
+
+    # Result label
+
+    global result_label
+    result_label = tk.Label(root, font=("Arial", 20), bg="white", width=10, justify='center')
+    result_label.pack(pady=20)
+
+
+    # Button
+
+    rand_button = tk.Button(text="Сгенерировать", font=("Arial", 16), bg="black", fg="red", command=rand)
+    rand_button.pack(pady=20)
+
+
+    # Binding "Enter" button 
+
+    root.bind('<Return>', lambda event: rand())
+
+
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    create_window()
