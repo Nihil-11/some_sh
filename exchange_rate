@@ -1,0 +1,29 @@
+
+import requests
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import ttk
+
+class Data:
+
+    API_key = '' # В КАВЫЧКИ ВАШ API  
+    URL = f'' # В КАВЫЧКИ ВАШ URL
+
+    @staticmethod
+    def response():
+
+        response = requests.get(Data.URL)  # Отправляем запрос к API
+
+        if response.status_code == 200:
+
+            data = response.json()  # Преобразование ответа в формат JSON
+
+            usd_to_eur = data['conversion_rates']['EUR'] # Получение курса EUR
+            usd_to_rub = data['conversion_rates']['RUB'] # Получение курса RUB
+
+            return("Курс USD к EUR: " +  str(round(usd_to_eur, 2)), "Курс USD к RUB: " + str(round(usd_to_rub, 2)))
+            
+        else:
+            return('Ошибка при запросе:', response.status_code)
+
+print(Data.response())
