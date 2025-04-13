@@ -1,0 +1,76 @@
+
+# Написать функцию get_by_category(category), которая вернёт список всех товаров в указанной категории.
+
+# Написать функцию get_most_expensive(), которая вернёт название и цену самого дорогого товара.
+
+# Написать функцию get_average_price(category), которая считает среднюю цену товаров в категории.
+
+products = [
+    {"name": "Laptop", "price": 1200, "category": "Electronics"},
+    {"name": "T-Shirt", "price": 25, "category": "Clothing"},
+    {"name": "Smartphone", "price": 900, "category": "Electronics"},
+    {"name": "Jeans", "price": 50, "category": "Clothing"},
+    {"name": "Book", "price": 15, "category": "Books"},
+    {"name": "Headphones", "price": 100, "category": "Electronics"},
+]
+
+
+def get_by_category(category):
+    
+    category_electronics = []
+    category_books = []
+    category_clothing = []
+
+    for product in products:
+
+        if product["category"] == "Electronics":
+            category_electronics.append(product)
+
+        if product["category"] == "Books":
+            category_books.append(product)
+
+        if product["category"] == "Clothing":
+            category_clothing.append(product)
+
+    if category == "Electronics":
+        return category_electronics
+    
+    if category == "Books":
+        return category_books
+
+    if category == "Clothing":
+        return category_clothing
+    
+
+def get_most_expensive():
+
+    max_product = max(products, key=lambda p: p["price"])
+    return max_product["name"], max_product["price"]
+        
+
+def get_average_price(category):
+
+    avr_price_electronics = []
+    avr_price_books = []
+    avr_price_clothing = []
+
+    for product in products:
+
+        if product["category"] == "Electronics":
+            avr_price_electronics.append(product["price"])
+
+        if product["category"] == "Books":
+            avr_price_books.append(product["price"])
+
+        if product["category"] == "Clothing":
+            avr_price_clothing.append(product["price"])
+
+    if category == "Electronics":
+        return round((sum(avr_price_electronics) / len(avr_price_electronics)), 2)
+           
+    if category == "Books":
+        return round(sum(avr_price_books) / len(avr_price_books), 2)
+    
+    if category == "Clothing":
+        return round(sum(avr_price_clothing) / len(avr_price_clothing), 2)
+  
