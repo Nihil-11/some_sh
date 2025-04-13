@@ -18,7 +18,7 @@ def rand():
             messagebox.showerror('', "Начало интервала должно быть меньше конца.")
             return
                 
-        if isinstance(n, int) and isinstance(m, int):
+        else:
         
             interval = list(range(n, m + 1))            
             result = random.choice(interval)
