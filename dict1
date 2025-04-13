@@ -1,0 +1,34 @@
+
+# 1. Вычислить среднюю оценку по каждому предмету (math и english).
+# 2. Найти студента с самой высокой общей суммой баллов.
+# 3. Вернуть имя этого студента и его сумму.
+
+students = [
+    {"name": "Alice", "math": 85, "english": 78},
+    {"name": "Bob", "math": 92, "english": 88},
+    {"name": "Charlie", "math": 78, "english": 85},
+    {"name": "David", "math": 90, "english": 91}
+]
+
+def avr_math():
+
+    marks = []
+    for i in students:
+        marks.append(i["math"])
+
+    return sum(marks) / len(marks)
+        
+    
+def avr_eng():
+
+    marks = []
+    for i in students:
+        marks.append(i["english"])
+
+    return sum(marks) / len(marks)
+
+
+def max_name():
+
+    top_student = max(students, key=lambda x: x["math"] + x["english"])
+    return top_student["name"], top_student["math"] + top_student["english"]
