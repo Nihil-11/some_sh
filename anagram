@@ -1,0 +1,38 @@
+
+"""1. Программа должна принимать две строки.
+
+2. Игнорировать пробелы и регистр букв.
+
+3. Проверять, являются ли обе строки анаграммами"""
+
+
+first_word = str(input("Введите первую строку: "))
+second_word = str(input("Введите вторую строку: "))
+
+def compare(): 
+
+    # Списки для букв из соответсвующей строки
+    first_word_letters = []
+    second_word_letters = []
+
+    for i in first_word:
+        i = i.lower()  
+        if not i.isspace(): # Проверка на пробел
+            first_word_letters.append(i)
+
+    for i in second_word:
+        i = i.lower()
+        if not i.isspace(): # Проверка на пробел
+            second_word_letters.append(i)
+
+
+    # Так как элементы из двух списков будут сравниваться в соответствии порядку, привожу оба списка к одинаковому порядку элементов
+    # + после сортировки списки будут иметь одинаковую длину (кол-во элементов), что обязательно по условию
+
+    if sorted(first_word_letters) == sorted(second_word_letters):
+        return("Строки являются анаграммами")
+
+    else: 
+        return("Строки не являются анаграммами")
+
+print(compare())
